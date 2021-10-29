@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Oravil\LaravelGuard\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelGuardCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-guard';
 
     public $description = 'My command';
 
