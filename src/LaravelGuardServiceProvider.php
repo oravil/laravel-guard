@@ -22,4 +22,11 @@ class LaravelGuardServiceProvider extends PackageServiceProvider
             ->hasMigration('create_laravel-guard_table')
             ->hasCommand(LaravelGuardCommand::class);
     }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton('laravelGuard', function ($app) {
+            return new LaravelGuard($app->config->get('guard'));
+        });
+    }
 }

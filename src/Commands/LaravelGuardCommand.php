@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class LaravelGuardCommand extends Command
 {
-    public $signature = 'laravel-guard';
+    public $signature = 'guard';
 
     public $description = 'My command';
 

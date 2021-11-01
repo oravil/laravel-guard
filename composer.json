@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37"
+        "guzzlehttp/guzzle": "^7.4",
+        "illuminate/contracts": "^8.37",
+        "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.3",
@@ -32,7 +33,10 @@
         "psr-4": {
             "Oravil\\LaravelGuard\\": "src",
             "Oravil\\LaravelGuard\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/Helpers/functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

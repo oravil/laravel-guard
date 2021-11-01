@@ -11,6 +11,6 @@ class LaravelGuardFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravel-guard';
+        return 'laravelGuard';
     }
 }

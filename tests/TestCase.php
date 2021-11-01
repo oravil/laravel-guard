@@ -8,12 +8,13 @@ use Oravil\LaravelGuard\LaravelGuardServiceProvider;
 
 class TestCase extends Orchestra
 {
+
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Oravil\\LaravelGuard\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Oravil\\LaravelGuard\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
