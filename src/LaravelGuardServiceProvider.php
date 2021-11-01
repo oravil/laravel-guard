@@ -2,9 +2,9 @@
 
 namespace Oravil\LaravelGuard;
 
+use Oravil\LaravelGuard\Commands\LaravelGuardCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Oravil\LaravelGuard\Commands\LaravelGuardCommand;
 
 class LaravelGuardServiceProvider extends PackageServiceProvider
 {
