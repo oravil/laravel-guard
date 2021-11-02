@@ -50,7 +50,7 @@ composer require oravil/laravel-guard
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Oravil\LaravelGuard\LaravelGuardServiceProvider" --tag="laravel-guard-config"
+php artisan vendor:publish --provider="Oravil\LaravelGuard\LaravelGuardServiceProvider"
 ```
 
 This is the contents of the published config file:
