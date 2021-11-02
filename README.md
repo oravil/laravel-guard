@@ -7,6 +7,26 @@
 
 ---
 
+# Package Support
+
+-   [x] [laravel 8](https://laravel.com)
+-   [x] [php 8](https://www.php.net/releases/8.0/en.php)
+-   [x] [IpRegistry - api](https://ipregistry.co)
+-   [x] [IpInfo - api](https://ipinfo.io)
+-   [x] [IpData - api](https://ipdata.co)
+-   [x] [Ip-Api - api](https://ip-api.com)
+-   [x] [Ip-Api-Pro - api](https://ip-api.com)
+-   [x] [IpApi.com - api](https://ipapi.com)
+-   [x] [IpHub - api](https://iphub.info)
+-   [x] [ProxyCheck - api](https://proxycheck.io)
+-   [ ] [GeoPlugin - api](http://www.geoplugin.net)
+-   [ ] [MaxMind - database](https://www.maxmind.com)
+-   [ ] [MaxMind - api](https://www.maxmind.com)
+-   [ ] [IpFinder - api](https://ipfinder.io)
+-   [ ] [ipgeolocation - api ](https://ipgeolocation.io)
+
+---
+
 This package can be used to handle all ip services as a Laravel package. It Can Help With:
 
 1. Determine the geographical location of website visitors based on their IP addresses
@@ -166,6 +186,11 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 ## Security Vulnerabilities
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
+## Thanks To:
+
+-   [Torann](https://github.com/Torann/laravel-geoip)
+-   [Stevebauman](https://github.com/stevebauman/location)
 
 ## Credits
 

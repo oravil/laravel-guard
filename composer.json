@@ -2,9 +2,18 @@
     "name": "oravil/laravel-guard",
     "description": "laravel geo location, ip services, proxy and vpn detected",
     "keywords": [
-        "oravil",
+        "geo",
+        "vpn",
+        "proxy",
+        "tor",
         "laravel",
-        "laravel-guard"
+        "laravel-guard",
+        "laravel geo",
+        "laravel proxy",
+        "laravel vpn",
+        "laravel location",
+        "laravel security",
+        "laravel tor"
     ],
     "homepage": "https://github.com/oravil/laravel-guard",
     "license": "MIT",
@@ -31,8 +40,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Oravil\\LaravelGuard\\": "src",
-            "Oravil\\LaravelGuard\\Database\\Factories\\": "database/factories"
+            "Oravil\\LaravelGuard\\": "src"
         },
         "files": [
             "src/Helpers/functions.php"
