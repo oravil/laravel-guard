@@ -17,10 +17,7 @@ class LaravelGuardServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-guard')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-guard_table')
-            ->hasCommand(LaravelGuardCommand::class);
+            ->hasConfigFile('guard');
     }
 
     public function packageRegistered()
