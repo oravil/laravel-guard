@@ -173,10 +173,12 @@ composer test
 ## Todo
 
 -   [x] add api service providers.
+-   [x] push to Github
+-   [x] push Pre-release
+-   [x] add to Packagist
 -   [ ] add cache driver.
 -   [ ] add database driver.
 -   [ ] block connections via filters.
--   [ ] add to Packagist
 -   [ ] add github documentation.
 
 ## Contributing
