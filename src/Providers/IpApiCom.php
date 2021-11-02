@@ -2,10 +2,10 @@
 
 namespace Oravil\LaravelGuard\Providers;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 class IpApiCom extends Provider
 {
@@ -17,12 +17,13 @@ class IpApiCom extends Provider
         $url = $this->config('api_url');
         $content = Http::accept('application/json')->timeout(2)->get($url . $ip, [
             'access_key' => $this->config('api_key'),
-            'security' => $this->config('security_plan_enable') ? 1 : 0
+            'security' => $this->config('security_plan_enable') ? 1 : 0,
         ]);
         $json = $content->json();
         if ($content->failed()) {
             throw RequestException::forFailedRequest($url, $content->status(), $json['code'], $json['message']);
         }
+
         return $content;
     }
 
@@ -51,10 +52,11 @@ class IpApiCom extends Provider
             $location->currencySymbol = $data->currency['symbol'];
         }
         if ($this->langEnabled) {
-            $location->langName     = $data['location']['language'][0]['name'];
-            $location->langCode     = $data['location']['language'][0]['code'];
-            $location->langNative   = $data['location']['language'][0]['native'];
+            $location->langName = $data['location']['language'][0]['name'];
+            $location->langCode = $data['location']['language'][0]['code'];
+            $location->langNative = $data['location']['language'][0]['native'];
         }
+
         return $location;
     }
 }

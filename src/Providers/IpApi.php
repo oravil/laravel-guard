@@ -2,10 +2,10 @@
 
 namespace Oravil\LaravelGuard\Providers;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 class IpApi extends Provider
 {
@@ -14,31 +14,31 @@ class IpApi extends Provider
      */
     protected function getUrlContent($ip, $data = null)
     {
-
         if ($this->config('api_key')) {
             $url = $this->config('pro_api_url');
             $content = Http::accept('application/json')
                 ->withHeaders([
-                    'User-Agent' => 'LaravelGuard'
+                    'User-Agent' => 'LaravelGuard',
                 ])
                 ->timeout(2)->get($url . $ip, [
                     'fields' => 25356799,
-                    'key' => $this->config('api_key')
+                    'key' => $this->config('api_key'),
                 ]);
         } else {
             $url = $this->config('api_url');
             $content = Http::accept('application/json')
                 ->withHeaders([
-                    'User-Agent' => 'LaravelGuard'
+                    'User-Agent' => 'LaravelGuard',
                 ])
                 ->timeout(2)->get($url . $ip, [
-                    'fields' => 25356799
+                    'fields' => 25356799,
                 ]);
         }
         $json = $content->json();
         if ($content->failed()) {
             throw RequestException::forFailedRequest($url, $content->status(), null, $json['message']);
         }
+
         return $content;
     }
 
@@ -74,6 +74,7 @@ class IpApi extends Provider
             $location->currencyCode = $data->currency;
             $location->currencySymbol = $data->currency;
         }
+
         return $location;
     }
 }

@@ -3,12 +3,13 @@
 namespace Oravil\LaravelGuard;
 
 use Illuminate\Support\Arr;
-use Oravil\LaravelGuard\Providers\Provider;
 use Oravil\LaravelGuard\Exceptions\ProviderDoseNotExist;
+use Oravil\LaravelGuard\Providers\Provider;
 
 class LaravelGuard
 {
     protected $provider;
+
     /**
      * Constructor.
      *
@@ -54,9 +55,10 @@ class LaravelGuard
             $class = Arr::pull($config, 'class');
         }
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw ProviderDoseNotExist::forProvider($class);
         }
+
         return
             new $class($config);
     }
@@ -112,6 +114,7 @@ class LaravelGuard
 
         return false;
     }
+
     /**
      * Get the client IP address.
      *

@@ -2,10 +2,10 @@
 
 namespace Oravil\LaravelGuard\Providers;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 class IpRegistry extends Provider
 {
@@ -16,12 +16,13 @@ class IpRegistry extends Provider
     {
         $url = $this->config('api_url');
         $content = Http::accept('application/json')->timeout(2)->get($url . $ip, [
-                'key' => $this->config('api_key')
+                'key' => $this->config('api_key'),
             ]);
         $json = $content->json();
         if ($content->failed()) {
             throw RequestException::forFailedRequest($url, $content->status(), $json['code'], $json['message']);
         }
+
         return $content;
     }
 
@@ -59,6 +60,7 @@ class IpRegistry extends Provider
             $location->langCode = $data->location['language']['code'];
             $location->langNative = $data->location['language']['native'];
         }
+
         return $location;
     }
 }

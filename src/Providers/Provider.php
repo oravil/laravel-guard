@@ -5,9 +5,8 @@ namespace Oravil\LaravelGuard\Providers;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Fluent;
-use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 abstract class Provider
 {
@@ -77,7 +76,7 @@ abstract class Provider
             $location->currencyStatus = $this->currencyEnabled;
         }
 
-        if (!$location->isEmpty()) {
+        if (! $location->isEmpty()) {
             return $location;
         }
 
@@ -88,6 +87,7 @@ abstract class Provider
     {
         return $this->process($ip);
     }
+
     /**
      * Attempt to fetch and process the location data from the provider.
      *
@@ -99,6 +99,7 @@ abstract class Provider
     {
         try {
             $response = json_decode($this->getUrlContent($ip), true);
+
             return new Fluent($response);
         } catch (Exception $e) {
             throw $e;
@@ -113,7 +114,8 @@ abstract class Provider
     protected function getNewLocation()
     {
         $location = config('guard.location', Location::class);
-        return new $location;
+
+        return new $location();
     }
 
     /**
@@ -125,9 +127,8 @@ abstract class Provider
      */
     protected function fluentDataIsNotEmpty(Fluent $data)
     {
-        return !empty(array_filter($data->getAttributes()));
+        return ! empty(array_filter($data->getAttributes()));
     }
-
 
     /**
      * Get configuration value.

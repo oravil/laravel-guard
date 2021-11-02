@@ -2,10 +2,10 @@
 
 namespace Oravil\LaravelGuard\Providers;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 class ProxyCheck extends Provider
 {
@@ -16,19 +16,20 @@ class ProxyCheck extends Provider
     {
         $url = $this->config('api_url');
         $content = Http::accept('application/json')->timeout(2)->get($url . $ip, [
-            'key'  => $this->config('api_key'),
-            'vpn'  => 1,
-            'asn'  => 1,
+            'key' => $this->config('api_key'),
+            'vpn' => 1,
+            'asn' => 1,
             'risk' => 1,
             'port' => 1,
             'seen' => 1,
             'days' => 1,
-            'tag'  => 'msg'
+            'tag' => 'msg',
         ]);
         $json = $content->json();
         if ($content->failed() || $json['status'] == 'denied' || $json['status'] == 'error') {
             throw RequestException::forFailedRequest($url, $content->status(), null, $json['message']);
         }
+
         return $content;
     }
 
