@@ -98,6 +98,21 @@ class LaravelGuard
     }
 
     /**
+     * Attempt to retrieve the api response of the user.
+     *
+     * @param string|null $ip
+     *
+     * @return json
+     */
+    public function echoApiResponse($ip = null)
+    {
+        if ($response = $this->provider->apiResponse($ip ?: $this->getClientIP())) {
+            return $response;
+        }
+
+        return false;
+    }
+    /**
      * Get the client IP address.
      *
      * @return string

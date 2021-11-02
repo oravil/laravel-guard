@@ -14,7 +14,7 @@ abstract class Provider
     protected $securityEnabled = false;
     protected $currencyEnabled = false;
     protected $langEnabled = false;
-
+    protected $ip = null;
 
     /**
      * Create a new GeoIP instance.
@@ -61,6 +61,7 @@ abstract class Provider
      */
     public function get($ip)
     {
+        $this->ip = $ip;
         $data = $this->process($ip);
         $location = $this->getNewLocation();
         // Here we will ensure the geo data we received isn't empty.
@@ -83,6 +84,10 @@ abstract class Provider
         return $this->fallback ? $this->fallback->get($ip) : false;
     }
 
+    public function apiResponse($ip)
+    {
+        return $this->process($ip);
+    }
     /**
      * Attempt to fetch and process the location data from the provider.
      *
