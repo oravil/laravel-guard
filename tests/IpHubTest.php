@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Config;
 use Oravil\LaravelGuard\Support\Location;
 
-
 it('can fetch test ip from iphub provider', function () {
     Config::set('guard.provider', 'iphub');
     $ping = getIp(config('guard.testing.valid_ip'));

@@ -2,10 +2,10 @@
 
 namespace Oravil\LaravelGuard\Providers;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Facades\Http;
-use Oravil\LaravelGuard\Support\Location;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Exceptions\RequestException;
+use Oravil\LaravelGuard\Support\Location;
 
 class IpHub extends Provider
 {
@@ -17,7 +17,7 @@ class IpHub extends Provider
         $url = $this->config('api_url');
         $content = Http::accept('application/json')
             ->withHeaders([
-                'X-Key' => $this->config('api_key')
+                'X-Key' => $this->config('api_key'),
             ])
             ->timeout(2)
             ->get($url . $ip);
@@ -25,6 +25,7 @@ class IpHub extends Provider
         if ($content->failed()) {
             throw RequestException::forFailedRequest($url, $content->status(), null, $json['error']);
         }
+
         return $content;
     }
 
@@ -49,6 +50,7 @@ class IpHub extends Provider
                 $location->isBogon = true;
             }
         }
+
         return $location;
     }
 }

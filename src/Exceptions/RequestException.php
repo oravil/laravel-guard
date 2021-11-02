@@ -2,7 +2,6 @@
 
 namespace Oravil\LaravelGuard\Exceptions;
 
-
 class RequestException extends LocationException
 {
     /**

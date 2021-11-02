@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('getIp')) {
+if (! function_exists('getIp')) {
     /**
      * Get the location of the provided IP.
      *
@@ -18,7 +18,7 @@ if (!function_exists('getIp')) {
     }
 }
 
-if (!function_exists('getApi')) {
+if (! function_exists('getApi')) {
     /**
      * Get the location of the provided IP.
      *

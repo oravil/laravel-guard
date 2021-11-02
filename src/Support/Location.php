@@ -150,7 +150,7 @@ class Location implements Arrayable
     /**
      * The security status.
      *
-     * @var boolean|null
+     * @var bool|null
      */
     public $securityStatus;
 
@@ -195,7 +195,6 @@ class Location implements Arrayable
      * @var string|null
      */
     public $provider_class;
-
 
     /**
      * Determine if the position is empty.
