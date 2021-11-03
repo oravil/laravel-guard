@@ -1,9 +1,9 @@
 # laravel geo location, ip services, proxy and vpn detected
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/oravil/laravel-guard.svg?style=flat-square)](https://packagist.org/packages/oravil/laravel-guard)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/oravil/laravel-guard/run-tests?label=tests)](https://github.com/oravil/laravel-guard/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/oravil/laravel-guard/Check%20&%20fix%20styling?label=code%20style)](https://github.com/oravil/laravel-guard/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/oravil/laravel-guard.svg?style=flat-square)](https://packagist.org/packages/oravil/laravel-guard)
+[![Donate](https://img.shields.io/packagist/v/oravil/laravel-guard.svg?style=flat-square)](https://paypal.me/AhmdYehia)
 
 ---
 
@@ -19,11 +19,11 @@
 -   [x] [IpApi.com - api](https://ipapi.com)
 -   [x] [IpHub - api](https://iphub.info)
 -   [x] [ProxyCheck - api](https://proxycheck.io)
--   [ ] [GeoPlugin - api](http://www.geoplugin.net)
--   [ ] [MaxMind - database](https://www.maxmind.com)
--   [ ] [MaxMind - api](https://www.maxmind.com)
+-   [x] [GeoPlugin - api](http://www.geoplugin.net)
 -   [ ] [IpFinder - api](https://ipfinder.io)
 -   [ ] [ipgeolocation - api ](https://ipgeolocation.io)
+-   [ ] [MaxMind - database](https://www.maxmind.com)
+-   [ ] [MaxMind - api](https://www.maxmind.com)
 
 ---
 
