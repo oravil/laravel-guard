@@ -20,8 +20,7 @@
 -   [x] [IpHub - api](https://iphub.info)
 -   [x] [ProxyCheck - api](https://proxycheck.io)
 -   [x] [GeoPlugin - api](http://www.geoplugin.net)
--   [ ] [IpFinder - api](https://ipfinder.io)
--   [ ] [ipgeolocation - api ](https://ipgeolocation.io)
+-   [x] [ipgeolocation - api ](https://ipgeolocation.io)
 -   [ ] [MaxMind - database](https://www.maxmind.com)
 -   [ ] [MaxMind - api](https://www.maxmind.com)
 

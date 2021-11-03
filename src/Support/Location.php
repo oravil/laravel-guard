@@ -78,6 +78,13 @@ class Location implements Arrayable
     public $areaCode;
 
     /**
+     * The Is the country belong to European Union?
+     *
+     * @var string|null
+     */
+    public $isEU;
+
+    /**
      * The currency status.
      *
      * @var bool|null
