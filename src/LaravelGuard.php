@@ -3,8 +3,8 @@
 namespace Oravil\LaravelGuard;
 
 use Illuminate\Support\Arr;
-use Oravil\LaravelGuard\Providers\Provider;
 use Oravil\LaravelGuard\Exceptions\ProviderDoseNotExist;
+use Oravil\LaravelGuard\Providers\Provider;
 
 class LaravelGuard
 {
@@ -55,7 +55,7 @@ class LaravelGuard
             $class = Arr::pull($config, 'class');
         }
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw ProviderDoseNotExist::forProvider($class);
         }
 

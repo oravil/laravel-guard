@@ -18,7 +18,7 @@ class IpGeoLocation extends Provider
         $content = Http::accept('application/json')->timeout(2)->get($url, [
             'apiKey' => $this->config('api_key'),
             'ip' => $ip,
-            'include' => 'security'
+            'include' => 'security',
         ]);
         $json = $content->json();
         if ($content->failed()) {
@@ -45,14 +45,14 @@ class IpGeoLocation extends Provider
         $location->currentTime = $data['time_zone']['current_time'];
 
         if ($this->securityEnabled && isset($data['security'])) {
-            $location->isCloudProvider  = $data['security']['is_cloud_provider'];
-            $location->isAnonymous      = $data['security']['is_anonymous'] || $data['security']['is_proxy'] || $data['security']['is_tor'];
-            $location->isThreat         = $data['security']['threat_score'] >= 10;
+            $location->isCloudProvider = $data['security']['is_cloud_provider'];
+            $location->isAnonymous = $data['security']['is_anonymous'] || $data['security']['is_proxy'] || $data['security']['is_tor'];
+            $location->isThreat = $data['security']['threat_score'] >= 10;
         }
 
         if ($this->currencyEnabled) {
-            $location->currencyName =   $data['currency']['name'];
-            $location->currencyCode =   $data['currency']['code'];
+            $location->currencyName = $data['currency']['name'];
+            $location->currencyCode = $data['currency']['code'];
             $location->currencySymbol = $data['currency']['symbol'];
         }
 
