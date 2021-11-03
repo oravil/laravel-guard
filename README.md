@@ -31,8 +31,8 @@ This package can be used to handle all ip services as a Laravel package. It Can 
 1. Determine the geographical location of website visitors based on their IP addresses
 2. Detected Vpn, Proxy, Tor and Hosting Ip's.
 3. retrieve Language, Currencies and Location Data.
-4. Block Connections beside country, language and connection type.
-5. Cache Ip data and storing in database.
+4. Block Connections beside country, language and connection type.(dev)
+5. Cache Ip data and storing in database.(dev)
 
 ## Support us
 
@@ -178,6 +178,7 @@ composer test
 -   [ ] add cache driver.
 -   [ ] add database driver.
 -   [ ] block connections via filters.
+-   [ ] push release.
 -   [ ] add github documentation.
 
 ## Contributing
