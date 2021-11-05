@@ -2,8 +2,8 @@
 
 namespace Oravil\LaravelGuard\Traits;
 
-use Illuminate\Support\Fluent;
 use Illuminate\Cache\CacheManager;
+use Illuminate\Support\Fluent;
 use Oravil\LaravelGuard\Support\Location;
 
 trait Cacheable
@@ -54,7 +54,6 @@ trait Cacheable
         return self::$cache;
     }
 
-
     /**
      * Get cache ip.
      * @param string $ip
@@ -89,7 +88,6 @@ trait Cacheable
      */
     public function flushCache()
     {
-
         return $this->getCacheInstance()->tags($this->cache_tag)->flush();
     }
 }
