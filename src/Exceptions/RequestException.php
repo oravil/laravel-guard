@@ -14,8 +14,7 @@ class RequestException extends LocationException
     public static function forFailedRequest($url, $err_status, $err_code = null, $err_message = null)
     {
         return new static(
-            "The Request From [$url] has failed with status code: \e[31m$err_status \n
-            Message: $err_message
+            "The Request From [$url] has failed with status code: $err_status , Message: \"$err_message\" ,
             $err_code"
         );
     }

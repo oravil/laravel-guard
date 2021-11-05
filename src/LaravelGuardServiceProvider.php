@@ -2,6 +2,7 @@
 
 namespace Oravil\LaravelGuard;
 
+use Oravil\LaravelGuard\Commands\LaravelGuardCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -16,6 +17,7 @@ class LaravelGuardServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-guard')
+            ->hasCommand(LaravelGuardCommand::class)
             ->hasConfigFile('guard');
     }
 
@@ -24,5 +26,10 @@ class LaravelGuardServiceProvider extends PackageServiceProvider
         $this->app->singleton('laravelGuard', function ($app) {
             return new LaravelGuard($app->config->get('guard'));
         });
+    }
+
+    public function packageBooted()
+    {
+        LaravelGuard::setCacheInstance($this->app['cache']);
     }
 }

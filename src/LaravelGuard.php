@@ -5,9 +5,11 @@ namespace Oravil\LaravelGuard;
 use Illuminate\Support\Arr;
 use Oravil\LaravelGuard\Exceptions\ProviderDoseNotExist;
 use Oravil\LaravelGuard\Providers\Provider;
+use Oravil\LaravelGuard\Traits\Cacheable;
 
 class LaravelGuard
 {
+    use Cacheable;
     protected $provider;
 
     /**
@@ -19,6 +21,8 @@ class LaravelGuard
      */
     public function __construct(protected array $config)
     {
+        $this->cache_tag = $this->config('cache_tag_name') ?? $this->cache_tag;
+        $this->cache_expires = $this->config('cache_expires') ?? $this->cache_expires;
         $this->setDefaultProvider();
     }
 
@@ -92,7 +96,20 @@ class LaravelGuard
      */
     public function get($ip = null)
     {
-        if ($location = $this->provider->get($ip ?: $this->getClientIP())) {
+        $ip = $ip ?: $this->getClientIP();
+        // Check cache for location
+        if ($this->config('cache_enable', false) && $location = $this->getCacheIp($ip)) {
+            $location->isCached = true;
+
+            return $location;
+        }
+
+        if ($location = $this->provider->get($ip)) {
+            // Should cache location
+            if ($this->config('cache_enable', false)) {
+                $this->setCacheIp($ip, $location);
+            }
+
             return $location;
         }
 
@@ -145,6 +162,26 @@ class LaravelGuard
     protected function getLocalHostTestingIp()
     {
         return $this->config('testing.valid_ip', '102.189.209.97');
+    }
+
+    /**
+     * Get the testing Connection types.
+     *
+     * @return string
+     */
+    public function testing($type = 'valid')
+    {
+        $type = match ($type) {
+            null => 'valid_ip',
+            'valid' => 'valid_ip',
+            'proxy' => 'proxy_ip',
+            'vpn' => 'proxy_ip',
+            'tor' => 'tor_ip',
+            'cloud' => 'cloud_ip',
+            'bogon' => 'bogon_ip',
+        };
+
+        return $this->get($this->config('testing.' . $type));
     }
 
     /**

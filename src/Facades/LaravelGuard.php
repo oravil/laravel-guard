@@ -1,13 +1,13 @@
 <?php
 
-namespace Oravil\LaravelGuard;
+namespace Oravil\LaravelGuard\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \Oravil\LaravelGuard\LaravelGuard
  */
-class LaravelGuardFacade extends Facade
+class LaravelGuard extends Facade
 {
     protected static function getFacadeAccessor()
     {

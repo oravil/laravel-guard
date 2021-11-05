@@ -1,8 +1,23 @@
 <?php
-// config for Oravil/LaravelGuard
+// config for Oravil/LaravelGuard config/guard.php
 return [
     // laravel guard version
-    'version' => '1.0',
+    'version' => '1.1',
+
+    /*
+    |-------------------------------------------------------------------------
+    | Cache Driver
+    | To use cache tags you should support one of cache drivers Redis / Memcached / Array
+    |-------------------------------------------------------------------------
+     *
+     */
+
+    'cache_enable' => false, // set true to enable cache
+
+    'cache_tag_name' => 'lg-location', // cache tag name
+
+    'cache_expires' => 30, // seconds
+
     /*
     |--------------------------------------------------------------------------
     | Provider
@@ -57,7 +72,7 @@ return [
     */
 
     'testing' => [
-        'enabled'  => env('GUARD_TESTING', true),
+        'enabled'  => env('GUARD_TESTING', false),
         'valid_ip' => '102.189.209.97',
         'cloud_ip' => '108.162.193.194',
         'proxy_ip' => '193.176.86.46',
@@ -70,8 +85,8 @@ return [
             'class' => \Oravil\LaravelGuard\Providers\IpRegistry::class, //provider class path
             'api_key' => env('IPREGISTRY_API_KEY', null), // api key
             'api_url' => 'https://api.ipregistry.co/', // api base url
-            'currencies' => env('GUARD_CURRENCIES', true), // if you need currencies data
-            'language' => env('GUARD_LANGUAGE', true), // if you need langauge data
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
             'security_enabled' => env('GUARD_SECURITY', true), //security status
         ],
 
@@ -112,6 +127,8 @@ return [
             'class' => \Oravil\LaravelGuard\Providers\IpData::class, //provider class path
             'api_key' => env('IPDATA_API_KEY', null), // api key
             'api_url' => 'https://api.ipdata.co/', // api base url
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
             'security_enabled' => env('GUARD_SECURITY', true), //security status
         ],
 
@@ -125,14 +142,15 @@ return [
         'geoplugin' => [ // ip data http://www.geoplugin.net
             'class' => \Oravil\LaravelGuard\Providers\GeoPlugin::class, //provider class path
             'api_url' => 'http://www.geoplugin.net/json.gp?ip', // api base url
-            'security_enabled' => env('GUARD_SECURITY', true), //security status
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
         ],
 
         'ipgeolocation' => [ // ip data https://ipgeolocation.io
             'class' => \Oravil\LaravelGuard\Providers\IpGeoLocation::class, //provider class path
             'api_key' => env('IP_GEO_LOCATION_API_KEY', null), // api key
             'api_url' => 'https://api.ipgeolocation.io/ipgeo', // api base url
-            'security_enabled' => env('GUARD_SECURITY', true), //security status
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
         ],
     ],
 
