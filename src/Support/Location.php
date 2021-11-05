@@ -204,6 +204,13 @@ class Location implements Arrayable
     public $provider_class;
 
     /**
+     * return ip is cached or not
+     *
+     * @var bool|null
+     */
+    public $isCached;
+
+    /**
      * Determine if the position is empty.
      *
      * @return bool

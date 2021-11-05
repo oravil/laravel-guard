@@ -15,9 +15,9 @@ class IpRegistry extends Provider
     protected function getUrlContent($ip, $data = null)
     {
         $url = $this->config('api_url');
-        $content = Http::accept('application/json')->timeout(2)->get($url . $ip, [
-                'key' => $this->config('api_key'),
-            ]);
+        $content = Http::accept('application/json')->get($url . $ip, [
+            'key' => $this->config('api_key'),
+        ]);
         $json = $content->json();
         if ($content->failed()) {
             throw RequestException::forFailedRequest($url, $content->status(), $json['code'], $json['message']);
@@ -41,6 +41,7 @@ class IpRegistry extends Provider
         $location->longitude = (string) $data->location['longitude'];
         $location->areaCode = $data->location['country']['area'];
         $location->timeZone = $data->time_zone['id'];
+        $location->isEU = $data->location['in_eu'];
         $location->currentTime = $data->time_zone['current_time'];
 
         if ($this->securityEnabled) {

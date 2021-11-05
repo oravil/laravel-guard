@@ -3,15 +3,17 @@
 namespace Oravil\LaravelGuard\Commands;
 
 use Illuminate\Console\Command;
+use Oravil\LaravelGuard\Facades\LaravelGuard;
 
 class LaravelGuardCommand extends Command
 {
-    public $signature = 'guard';
+    public $signature = 'guard:flush';
 
-    public $description = 'My command';
+    public $description = 'Flush Laravel Guard Locations Data';
 
     public function handle()
     {
-        $this->comment('All done');
+        LaravelGuard::flushCache();
+        $this->info('Laravel Guard Locations Data Cache Flushed Successfully!');
     }
 }
