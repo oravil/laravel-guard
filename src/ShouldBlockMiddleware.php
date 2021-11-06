@@ -3,14 +3,12 @@
 namespace Oravil\LaravelGuard;
 
 use Closure;
-use Illuminate\Support\Arr;
-use Illuminate\Http\Response;
 
 class ShouldBlockMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!config('guard.security.enabled', false)) {
+        if (! config('guard.security.enabled', false)) {
             return $next($request);
         }
 
