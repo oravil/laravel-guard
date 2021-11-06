@@ -95,7 +95,7 @@ return [
         'middleware' => [
             //\Oravil\LaravelGuard\ShouldBlockMiddleware::class, copy to Http/kernel.php
             'enabled' => false,
-            'block_message' => 'Your connection has been blocked, Our system has identified you as a threa',
+            'block_message' => 'Your connection has been blocked, Our system has identified you as a threat',
             'abort_code' => 403
         ],
         'filters' => [
