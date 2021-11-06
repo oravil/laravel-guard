@@ -2,7 +2,6 @@
 
 namespace Oravil\LaravelGuard;
 
-use Illuminate\Contracts\Http\Kernel;
 use Oravil\LaravelGuard\Commands\LaravelGuardCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
