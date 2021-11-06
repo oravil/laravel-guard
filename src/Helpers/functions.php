@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('getIp')) {
+if (! function_exists('getIp')) {
     /**
      * Get the location of the provided IP.
      *
@@ -14,7 +14,7 @@ if (!function_exists('getIp')) {
     }
 }
 
-if (!function_exists('laravelGuard')) {
+if (! function_exists('laravelGuard')) {
     /**
      * Get the location of the provided IP.
      *
@@ -27,6 +27,7 @@ if (!function_exists('laravelGuard')) {
         if (is_null($ip)) {
             return app('laravelGuard');
         }
+
         return app('laravelGuard')->get($ip);
     }
 }

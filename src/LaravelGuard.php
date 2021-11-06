@@ -3,9 +3,9 @@
 namespace Oravil\LaravelGuard;
 
 use Illuminate\Support\Arr;
-use Oravil\LaravelGuard\Traits\Cacheable;
-use Oravil\LaravelGuard\Providers\Provider;
 use Oravil\LaravelGuard\Exceptions\ProviderDoseNotExist;
+use Oravil\LaravelGuard\Providers\Provider;
+use Oravil\LaravelGuard\Traits\Cacheable;
 
 class LaravelGuard
 {
@@ -59,7 +59,7 @@ class LaravelGuard
             $class = Arr::pull($config, 'class');
         }
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw ProviderDoseNotExist::forProvider($class);
         }
 
@@ -100,6 +100,7 @@ class LaravelGuard
         // Check cache for location
         if ($this->config('cache_enable', false) && $location = $this->getCacheIp($ip)) {
             $location->isCached = true;
+
             return $location;
         }
 
@@ -108,6 +109,7 @@ class LaravelGuard
             if ($this->config('cache_enable', false)) {
                 $this->setCacheIp($ip, $location);
             }
+
             return $location;
         }
 
