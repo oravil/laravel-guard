@@ -80,7 +80,42 @@ return [
         'bogon_ip' => '203.0.113.24',
     ],
 
-    'providers' => [ // providers list
+
+    /*
+    |--------------------------------------------------------------------------
+    | Security Filters
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'security' => [
+        'enabled' => false,
+        'middleware' => [
+            //\Oravil\LaravelGuard\ShouldBlockMiddleware::class, copy to Http/kernel.php
+            'enabled' => false,
+            'block_message' => 'Your connection has been blocked, Our system has identified you as a threa',
+            'abort_code' => 403
+        ],
+        'filters' => [
+            'is_cloud' => true,
+            'is_anonymous' => true,
+            'is_threat' => true,
+            'is_bogon' => true,
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Providers List Configure
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'providers' => [
         'ipregistry' => [  // ip registry https://ipregistry.co/docs/
             'class' => \Oravil\LaravelGuard\Providers\IpRegistry::class, //provider class path
             'api_key' => env('IPREGISTRY_API_KEY', null), // api key

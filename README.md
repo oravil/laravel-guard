@@ -45,8 +45,9 @@ This package can be used to handle all ip services as a Laravel package. It Can 
 1. Determine the geographical location of website visitors based on their IP addresses
 2. Detected Vpn, Proxy, Tor and Hosting Ip's.
 3. retrieve Language, Currencies and Location Data.
-4. Block Connections beside country, language and connection type.(dev)
-5. Cache Ip data and storing in database.(dev)
+4. Block connections via Connections Type Filters.
+5. Cache ip data in cache drivers
+6. Block Connections by country(dev).
 
 ## Support us
 
@@ -72,7 +73,7 @@ This is the contents of the published config file:
 // config for Oravil/LaravelGuard config/guard.php
 return [
     // laravel guard version
-    'version' => '1.0',
+    'version' => '1.2',
 
     /*
     |-------------------------------------------------------------------------
@@ -150,13 +151,48 @@ return [
         'bogon_ip' => '203.0.113.24',
     ],
 
-    'providers' => [ // providers list
+
+    /*
+    |--------------------------------------------------------------------------
+    | Security Filters
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'security' => [
+        'enabled' => env('GUARD_SECURITY', false),
+        'middleware' => [
+            //\Oravil\LaravelGuard\ShouldBlockMiddleware::class, copy to Http/kernel.php
+            'enabled' => false,
+            'block_message' => 'Your connection has been blocked, Our system has identified you as a threa',
+            'abort_code' => 403
+        ],
+        'filters' => [
+            'is_cloud' => true,
+            'is_anonymous' => true,
+            'is_threat' => true,
+            'is_bogon' => true,
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Providers List Configure
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'providers' => [
         'ipregistry' => [  // ip registry https://ipregistry.co/docs/
             'class' => \Oravil\LaravelGuard\Providers\IpRegistry::class, //provider class path
             'api_key' => env('IPREGISTRY_API_KEY', null), // api key
             'api_url' => 'https://api.ipregistry.co/', // api base url
-            'currencies' => env('GUARD_CURRENCIES', true), // if you need currencies data
-            'language' => env('GUARD_LANGUAGE', true), // if you need langauge data
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
             'security_enabled' => env('GUARD_SECURITY', true), //security status
         ],
 
@@ -197,6 +233,8 @@ return [
             'class' => \Oravil\LaravelGuard\Providers\IpData::class, //provider class path
             'api_key' => env('IPDATA_API_KEY', null), // api key
             'api_url' => 'https://api.ipdata.co/', // api base url
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
             'security_enabled' => env('GUARD_SECURITY', true), //security status
         ],
 
@@ -210,17 +248,17 @@ return [
         'geoplugin' => [ // ip data http://www.geoplugin.net
             'class' => \Oravil\LaravelGuard\Providers\GeoPlugin::class, //provider class path
             'api_url' => 'http://www.geoplugin.net/json.gp?ip', // api base url
-            'security_enabled' => env('GUARD_SECURITY', true), //security status
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
         ],
 
         'ipgeolocation' => [ // ip data https://ipgeolocation.io
             'class' => \Oravil\LaravelGuard\Providers\IpGeoLocation::class, //provider class path
             'api_key' => env('IP_GEO_LOCATION_API_KEY', null), // api key
             'api_url' => 'https://api.ipgeolocation.io/ipgeo', // api base url
-            'security_enabled' => env('GUARD_SECURITY', true), //security status
+            'currencies_enabled' => env('GUARD_CURRENCIES', true), // if you need currencies data
+            'language_enabled' => env('GUARD_LANGUAGE', true), // if you need langauge data
         ],
     ],
-
 ];
 ```
 
@@ -243,6 +281,51 @@ echo LaravelGuard::echoApiResponse('8.8.8.8');   // get request from api for cli
 echo LaravelGuard::echoApiResponse();   // get request from api for client ip | testing ip if testing_enable => true
 echo LaravelGuard::testing('type');              // testing connection type(valid, proxy, vpn, tor, cloud, bogon), default: valid
 LaravelGuard::flushCache();                      // flushed locations cache
+
+```
+
+## Security Filters
+
+```php
+// app/http/kernel.php
+protected $middleware = [
+    ...
+    \Oravil\LaravelGuard\ShouldBlockMiddleware::class
+];
+
+//config/guard.php
+'security' => [
+        'enabled' => env('GUARD_SECURITY', true), //set true to enable security filters
+        'middleware' => [
+            //\Oravil\LaravelGuard\ShouldBlockMiddleware::class, copy to Http/kernel.php
+            'enabled' => true, // set true to enable middleware
+            'block_message' => 'Your connection has been blocked, Our system has identified you as a threa', //edit block message
+            'abort_code' => 403 //edit abort code
+        ],
+        'filters' => [
+            'is_cloud' => true,
+            'is_anonymous' => true,
+            'is_threat' => true,
+            'is_bogon' => true,
+        ]
+    ],
+```
+
+# to retrive ip data from middleware without block connection
+
+```php
+// set security true
+'middleware' => [
+    //\Oravil\LaravelGuard\ShouldBlockMiddleware::class, copy to Http/kernel.php
+    'enabled' => false, // set false to disable block connections
+    ....
+]
+// get ip data
+dd(request()->ipGuard);
+//check should block connection
+dd(request()->ipGuard->shouldBlock);
+// check block type
+dd(request()->ipGuard->blockType);
 
 ```
 
@@ -290,14 +373,14 @@ return laravelGuard()->flushCache();
 -   [x] add cache flush console command
 -   [x] add global functions
 -   [x] push version 1.1
--   [ ] add fallbacks for limit requests
--   [ ] add database driver
+-   [x] block connections via filters
+-   [x] block connections via midlleware
+-   [x] push version 1.2
 -   [ ] add create custom provider console command
--   [ ] push version 1.2
--   [ ] block connections via filters
--   [ ] add github documentation
 -   [ ] push version 1.3
--   [ ] push stable release
+-   [ ] add fallbacks for limit requests
+-   [ ] add github documentation
+-   [ ] push version 2.0
 
 ## Contributing
 

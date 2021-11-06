@@ -190,6 +190,20 @@ class Location implements Arrayable
     public $isBogon;
 
     /**
+     * The security Filter Middleware shouldBlock.
+     *
+     * @var bool|null
+     */
+    public $shouldBlock;
+
+    /**
+     * The security Filter Middleware shouldBlock.
+     *
+     * @var string|null
+     */
+    public $blockType;
+
+    /**
      * The provider used for retrieving the location.
      *
      * @var string|null
